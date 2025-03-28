@@ -1,4 +1,4 @@
-// RAG Demo with LangChain, ChromaDB, and OpenAI
+// RAG Demo with LangChain, MemoryVectorStore, and OpenAI
 import { config } from 'dotenv';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
@@ -6,7 +6,7 @@ import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { ChatOpenAI } from '@langchain/openai';
 import { PromptTemplate } from '@langchain/core/prompts';
-import { Chroma } from '@langchain/community/vectorstores/chroma';
+import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { formatDocumentsAsString } from 'langchain/util/document';
@@ -30,7 +30,7 @@ const llm = new ChatOpenAI({
 
 // Main function to demonstrate RAG
 async function runRAGDemo() {
-  console.log('🚀 Starting RAG Demo with LangChain, ChromaDB, and OpenAI');
+  console.log('🚀 Starting RAG Demo with LangChain and OpenAI');
   
   // Step 1: Load documents
   console.log('\n📚 Loading documents...');
@@ -51,11 +51,9 @@ async function runRAGDemo() {
   const splitDocs = await textSplitter.splitDocuments(docs);
   console.log(`Created ${splitDocs.length} chunks.`);
   
-  // Step 3: Create vector store with Chroma
-  console.log('\n🧠 Creating vector store with ChromaDB...');
-  const vectorStore = await Chroma.fromDocuments(splitDocs, embeddings, {
-    collectionName: 'rag-demo-collection'
-  });
+  // Step 3: Create in-memory vector store (no server needed)
+  console.log('\n🧠 Creating in-memory vector store...');
+  const vectorStore = await MemoryVectorStore.fromDocuments(splitDocs, embeddings);
   console.log('Vector store created successfully.');
   
   // Step 4: Create retriever

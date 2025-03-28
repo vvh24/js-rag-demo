@@ -1,9 +1,9 @@
-# RAG Demo with LangChain, ChromaDB, and OpenAI
+# RAG Demo with LangChain and OpenAI
 
 This is a basic JavaScript implementation of a Retrieval-Augmented Generation (RAG) system using:
 
 - LangChain.js for orchestration
-- ChromaDB for vector storage
+- In-memory vector store for development simplicity
 - OpenAI API for embeddings and completions
 
 ## Project Structure
@@ -34,7 +34,7 @@ This is a basic JavaScript implementation of a Retrieval-Augmented Generation (R
 
 1. Documents are loaded and split into chunks
 2. OpenAI embeddings are generated for each chunk
-3. Embeddings are stored in ChromaDB vector store
+3. Embeddings are stored in an in-memory vector store
 4. User query is processed through the same embedding model
 5. Similar context is retrieved from the vector store
 6. Retrieved context and query are sent to OpenAI for a complete response
