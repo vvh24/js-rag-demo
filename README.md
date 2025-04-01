@@ -2,7 +2,7 @@
 
 Assignments - Will be updated as we work
 
-[Try BERT](llm_embeddings_assignment1.md)
+[Assignment 1 - Meet BERT](llm_embeddings_assignment1.md)
 
 ## Introduction
 
@@ -50,6 +50,32 @@ This is a JavaScript implementation of a Retrieval-Augmented Generation (RAG) sy
 4. User query is processed through the same embedding model
 5. Similar context is retrieved from the vector store
 6. Retrieved context and query are sent to OpenAI for a complete response
+
+## The Journey to RAG: Key Milestones in NLP
+
+Retrieval-Augmented Generation didn't appear in a vacuum. It builds upon decades of research in Natural Language Processing (NLP) and machine learning. Understanding this history helps appreciate *why* RAG is effective and how current AI systems evolved.
+
+1.  **Early Vector Representations (Pre-Deep Learning):** The idea of representing words or documents as numerical vectors has been around for a while (e.g., TF-IDF). These methods primarily captured word frequencies but struggled with semantic meaning and context.
+
+2.  **Dense Word Embeddings (Word2Vec & GloVe):** A major breakthrough came with models that *learned* dense vector representations (embeddings) from large text corpora. These models captured semantic relationships (e.g., "king" - "man" + "woman" ≈ "queen").
+    *   *Key Papers:*
+        *   Mikolov et al. (2013). [*Efficient Estimation of Word Representations in Vector Space*](https://arxiv.org/abs/1301.3781). (Word2Vec)
+        *   Pennington et al. (2014). [*GloVe: Global Vectors for Word Representation*](https://nlp.stanford.edu/pubs/glove.pdf).
+
+3.  **The Transformer Revolution:** The introduction of the Transformer architecture fundamentally changed NLP. Its "self-attention" mechanism allowed models to weigh the importance of different words in a sequence when processing any given word, enabling a much deeper understanding of context compared to previous sequential models (like RNNs/LSTMs).
+    *   *Key Paper:*
+        *   Vaswani et al. (2017). [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762).
+
+4.  **The Era of Large Pre-trained Models (BERT & GPT):** The Transformer architecture enabled the creation of massive models pre-trained on vast amounts of text data. These models learned rich language representations that could be fine-tuned for various downstream tasks with remarkable success.
+    *   *Key Papers:*
+        *   Devlin et al. (2018). [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://arxiv.org/abs/1810.04805).
+        *   Radford et al. (GPT series, e.g., 2018, 2019, 2020).
+
+5.  **The Rise of Retrieval-Augmented Generation (RAG):** While large models store significant knowledge implicitly, they can still "hallucinate" or lack specific, up-to-date information. RAG emerged as a way to combine the generative power of large models with the factual grounding provided by explicit information retrieval systems. The model first *retrieves* relevant documents from a knowledge source and then *generates* an answer conditioned on both the original prompt and the retrieved information.
+    *   *Key Paper:*
+        *   Lewis et al. (2020). [*Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*](https://arxiv.org/abs/2005.11401).
+
+This project implements the core ideas presented in the RAG paper, leveraging modern tools like LangChain and sophisticated embedding models that stand on the shoulders of these earlier breakthroughs.
 
 ## Core Implementation
 
