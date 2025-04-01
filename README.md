@@ -1,5 +1,9 @@
 # RAG System: Understanding and Implementation
 
+Assignments - Will be updated as we work
+
+[Try BERT](llm_embeddings_assignment1.md)
+
 ## Introduction
 
 Welcome to this Retrieval-Augmented Generation (RAG) demonstration project. This repository contains a practical implementation of RAG using LangChain and OpenAI, accompanied by a conceptual exploration of the underlying AI technologies that make it work.
