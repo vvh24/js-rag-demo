@@ -18,10 +18,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@langchain/openai": "^0.0.14",
-    "langchain": "^0.1.20",
     "@langchain/community": "^0.0.32",
+    "@langchain/openai": "^0.0.14",
     "chromadb": "^1.7.3",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "langchain": "^0.1.20",
+    "socket.io": "^4.8.1"
   }
 }
