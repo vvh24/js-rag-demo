@@ -16,7 +16,10 @@ function addMessage(sender, text) {
     // Add CSS classes for styling: common 'message' class and specific sender class
     messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'ai-message');
     // Set the text content of the message div
-    messageDiv.textContent = text;
+    // Use innerHTML instead of textContent to allow basic HTML rendering (like code blocks)
+    // **Security Note:** Ensure server-side sanitization if AI can generate arbitrary HTML.
+    // For this example, we assume AI output is safe or contains only simple formatting.
+    messageDiv.innerHTML = text; // Changed from textContent
     // Append the new message div to the chatbox
     chatbox.appendChild(messageDiv);
     // Automatically scroll the chatbox to the bottom to show the latest message
@@ -106,7 +109,7 @@ chatForm.addEventListener('submit', async (event) => {
                         if (data.content) {
                             currentAiText += data.content;
                             // Update the AI message div's text content in real-time
-                            aiMessageDiv.textContent = currentAiText; 
+                            aiMessageDiv.innerHTML = currentAiText; 
                             // Scroll chatbox down as new content arrives
                             chatbox.scrollTop = chatbox.scrollHeight; 
                         } 
@@ -118,8 +121,10 @@ chatForm.addEventListener('submit', async (event) => {
                         // If the data contains an error message from the server
                         else if (data.error) {
                             console.error("Server error message:", data.error);
-                            aiMessageDiv.textContent = `Error: ${data.error}`;
+                            aiMessageDiv.innerHTML = `Error: ${data.error}`;
                             aiMessageDiv.style.color = 'red'; // Style error messages
+                            // Apply specific error class for better styling
+                            aiMessageDiv.classList.add('error-message');
                         }
                     } catch (e) {
                         // Handle errors during JSON parsing (e.g., malformed JSON)
@@ -143,8 +148,10 @@ chatForm.addEventListener('submit', async (event) => {
         // Handle errors during the fetch operation or stream reading
         console.error('Fetch/Stream error:', error);
         // Display an error message in the AI message placeholder
-        aiMessageDiv.textContent = 'Error connecting to the server or processing the stream.';
+        aiMessageDiv.innerHTML = 'Error connecting to the server or processing the stream.';
         aiMessageDiv.style.color = 'red';
+        // Apply specific error class for better styling
+        aiMessageDiv.classList.add('error-message');
     } finally {
         // This block always executes, whether the try block succeeded or failed
         

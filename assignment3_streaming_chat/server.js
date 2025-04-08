@@ -108,7 +108,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Initialize OpenAI client with the API key from environment variables
 const chat = new ChatOpenAI({
     openAIApiKey: process.env.OPENAI_API_KEY, // Ensure OPENAI_API_KEY is in your .env file
-    modelName: "4o-mini", // Or your preferred model
+    modelName: "gpt-4o", // Or your preferred model
     temperature: 0.7, // Controls randomness (creativity) of the response
     streaming: true, // IMPORTANT: Enable streaming for SSE
 });
