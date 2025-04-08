@@ -1,0 +1,139 @@
+/* General body styling */
+body {
+    font-family: 'Inter', sans-serif; /* Use Inter font stack, falling back to generic sans-serif */
+    margin: 0; /* Remove default body margin */
+    background-color: #f7f7f8; /* Set a light grey background color */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Ensure body takes at least the full viewport height */
+    color: #333; /* Set default text color */
+}
+
+/* Styling for the main chat container */
+.container {
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 12px; /* Apply rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Add a subtle shadow */
+    width: 90%; /* Use 90% of the viewport width */
+    max-width: 700px; /* Limit maximum width */
+    display: flex; /* Use flexbox for inner layout */
+    flex-direction: column; /* Arrange children vertically */
+    height: 85vh; /* Set height relative to viewport height */
+    overflow: hidden; /* Hide content that overflows the container */
+}
+
+/* Styling for the main heading */
+h1 {
+    text-align: center; /* Center the heading text */
+    color: #222; /* Darker color for the heading */
+    padding: 25px 20px; /* Add padding top/bottom and left/right */
+    margin: 0; /* Remove default heading margin */
+    border-bottom: 1px solid #eaeaef; /* Add a light border below the heading */
+    font-size: 1.4em; /* Set font size */
+    font-weight: 600; /* Set font weight (semi-bold) */
+}
+
+/* Styling for the chat message display area */
+#chatbox {
+    flex-grow: 1; /* Allow chatbox to take up available vertical space */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+    padding: 25px; /* Add padding inside the chatbox */
+    display: flex; /* Use flexbox for message layout */
+    flex-direction: column; /* Arrange messages vertically */
+    gap: 18px; /* Add space between messages */
+}
+
+/* Base styling for individual messages */
+.message {
+    padding: 12px 18px; /* Padding inside message bubbles */
+    border-radius: 20px; /* Apply rounded corners to bubbles */
+    max-width: 80%; /* Limit the maximum width of messages */
+    word-wrap: break-word; /* Allow long words to break and wrap */
+    line-height: 1.5; /* Set line spacing for readability */
+}
+
+/* Specific styling for user messages */
+.user-message {
+    background-color: #007aff; /* Blue background for user messages */
+    color: white; /* White text for user messages */
+    align-self: flex-end; /* Align user messages to the right */
+    border-bottom-right-radius: 6px; /* Slightly flatten the bottom-right corner */
+}
+
+/* Specific styling for AI messages */
+.ai-message {
+    background-color: #f0f0f5; /* Light grey background for AI messages */
+    color: #222; /* Dark text for AI messages */
+    align-self: flex-start; /* Align AI messages to the left */
+    border-bottom-left-radius: 6px; /* Slightly flatten the bottom-left corner */
+}
+
+/* Styling for the chat input form area */
+#chat-form {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align input and button */
+    padding: 20px; /* Add padding around the form */
+    border-top: 1px solid #eaeaef; /* Add a light border above the form */
+    background-color: #ffffff; /* White background for the form area */
+}
+
+/* Styling for the message text input field */
+#message-input {
+    flex-grow: 1; /* Allow input field to take available horizontal space */
+    padding: 12px 18px; /* Padding inside the input field */
+    border: 1px solid #d1d1d6; /* Light grey border */
+    border-radius: 22px; /* Rounded corners matching the button */
+    margin-right: 12px; /* Add space to the right of the input */
+    font-size: 1rem; /* Set font size */
+    line-height: 1.5; /* Set line height */
+}
+
+/* Styling for the input field when focused */
+#message-input:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007aff; /* Change border color to blue on focus */
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); /* Add a subtle blue glow on focus */
+}
+
+/* Styling for the send button */
+#send-button {
+    padding: 12px 24px; /* Padding inside the button */
+    background-color: #007aff; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 22px; /* Rounded corners matching the input */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 1rem; /* Set font size */
+    font-weight: 500; /* Set font weight (medium) */
+    transition: background-color 0.2s ease; /* Smooth transition for background color */
+    flex-shrink: 0; /* Prevent the button from shrinking if space is limited */
+}
+
+/* Styling for the send button on hover */
+#send-button:hover {
+    background-color: #005ecb; /* Darker blue on hover */
+}
+
+/* Styling for the send button when disabled */
+#send-button:disabled {
+    background-color: #a0cfff; /* Lighter blue when disabled */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+/* Styling for the AI message loading indicator */
+.loading::after {
+    content: '...'; /* Display three dots */
+    display: inline-block; /* Treat as an inline block */
+    vertical-align: bottom; /* Align dots with the bottom of the text */
+    width: 1em; /* Set a fixed width for alignment */
+    text-align: left; /* Align dots to the left within their space */
+    animation: loading-dots 1.4s infinite; /* Apply the pulsing animation */
+}
+
+/* Keyframes animation for the loading dots */
+@keyframes loading-dots {
+    0%, 20% { content: '.'; } /* Show one dot */
+    40% { content: '..'; } /* Show two dots */
+    60%, 100% { content: '...'; } /* Show three dots */
+}
