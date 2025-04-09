@@ -1,0 +1,63 @@
+1. Evolution of Embeddings: Briefly describe the key limitation of TF-IDF that Word2Vec aimed to solve. What limitation of sequential models (like LSTMs) did the Transformer architecture address with its attention mechanism?
+TF-IDF relied primarily on word frequencies and could find documents with similar keywords, but it struggled to capture deeper semantic meaning or synonymy. 
+Sequential models like RNNs/LSTMs processed text in order and struggled with long-range dependencies - they had difficulty connecting words that appeared far apart in a sentence. 
+The Transformer architecture solved this with its "self-attention" mechanism, which allows the model to look at the entire input sequence simultaneously and weigh the importance of any word when interpreting another word, regardless of distance.
+
+2. BERT's Contribution: What was the significance of BERT's "bidirectional" pre-training compared to earlier models?
+The significance of BERT's "bidirectional" pre-training was that it learned to predict masked tokens based on both preceding AND succeeding context. Earlier models typically processed text unidirectionally (left-to-right or right-to-left), limiting their understanding of context.
+
+3. BERT vs. Ada: Create a table summarizing the key differences (pros/cons) between using a locally run Sentence-BERT model versus the OpenAI `text-embedding-ada-002` API for generating embeddings in a project.
+
+Feature	Sentence-BERT (local)	                  OpenAI ‘text-embedding-ada-002’
+Hosting 	Local (via libraries) or Self-hosted API	    Cloud API (OpenAI)
+Cost	       Free (model weights) + Computing costs	    Pay-per-use (per token)
+Data Privacy	High (data stays local)	                  Lower (data sent to OpenAI)
+Performance 	Variable (depends on model size & hardware)   Very Fast (highly optimized service)
+Dimensions	Variable (e.g., 384, 768, 1024)	           1536
+Max Input 	Typically 512 tokens	                         8191 tokens
+Ease of Use	Moderate (requires setup)	                  Very Easy (simple API call)
+Quality 	Potentially Very High (esp. task-specific)    Very High (strong general-purpose)
+Customization	High (can choose/fine-tune models)	           None (use the provided model)
+
+
+4. Chunking Scenario: Imagine you have a large PDF textbook (1000 pages) that you want to use for RAG.
+       Why is chunking absolutely necessary here (consider model input limits)?
+       Chunking is absolutely necessary because embedding models like BERT have a maximum input sequence length (often 512 tokens), and even newer models like OpenAI's ada-002 (8191 tokens) can't handle a full textbook at once. 
+       
+       Describe *two* different chunking strategies you could use.
+              •Recursive Character Text Splitting: Split based on a hierarchy of separators (e.g., first try chapter breaks, then paragraphs \n\n, then sentences). This keeps semantic units like paragraphs and sentences intact. 
+              •Document-Specific Chunking: For a textbook, use the actual structure (split by chapters, sections, and subsections using headings) to create meaningful chunks that align with the book's organization.
+      
+       What factors would influence your choice of chunk *size* and *overlap*?
+              •Model token limit (must fit within the limit) 
+              •Nature of textbook content (technical vs. narrative) 
+              •Retrieval goal (specific answers vs. broader context) 
+              •The embedding model being used 
+              •Whether maintaining chapter/section integrity is important 
+              •Ideal overlap (10-20%) to ensure context is preserved across chunk boundaries
+
+5. Model Selection Rationale: For each scenario below, which embedding approach (OpenAI Ada vs. Local SBERT) might be more suitable and *why*? Justify your choice based on the factors discussed (cost, privacy, performance, quality, ease of use).
+       
+       A startup building a quick prototype chatbot for public website FAQs.
+OpenAI Ada would be more suitable because:
+       •Ease of use enables faster prototyping
+       •Speed of API is beneficial for customer-facing applications
+       •Cost is less of a concern for a smaller FAQ dataset
+       •Privacy is less critical for already public information
+       •No need to set up and maintain infrastructure
+
+       A hospital developing an internal system to search sensitive patient record summaries (anonymized for the search, of course!).
+Local SBERT would be more suitable because:
+       •Data privacy is paramount for medical records (stays on-premises)
+       •Regulatory compliance (like HIPAA) may restrict sending data to third parties
+       •One-time setup cost vs. ongoing API costs for large volumes of medical data
+       •Control over the specific model and ability to fine-tune for medical terminology
+
+       A solo developer building a personal note-taking app with semantic search features, running only on their own powerful desktop PC.
+Local SBERT would be more suitable because:
+       •Privacy of personal notes is maintained (data stays on their computer)
+       •No ongoing costs, which matters for a personal project
+       •They have a powerful desktop PC to handle the computation
+       •One-time setup cost is acceptable for a long-term personal tool
+       •Potential offline functionality without needing API access
+
